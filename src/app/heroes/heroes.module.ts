@@ -10,7 +10,7 @@ import { NewPageComponent } from './pages/new-page/new-page.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { HeroPageComponent } from './pages/hero-page/hero-page.component';
 import { CardComponent } from './components/card/card.component';
-import { HeroCardImgPipe } from './pipes/card-img.pipe';
+import { CardImgPipe } from './pipes/card-img.pipe';
 
 
 
@@ -22,7 +22,7 @@ import { HeroCardImgPipe } from './pipes/card-img.pipe';
     SearchPageComponent,
     HeroPageComponent,
     CardComponent,
-    HeroCardImgPipe
+    CardImgPipe
   ],
   imports: [
     CommonModule,
