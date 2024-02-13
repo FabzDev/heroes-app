@@ -23,7 +23,7 @@ import { HeroPageComponent } from './pages/hero-page/hero-page.component';
   imports: [
     CommonModule,
     HeroesRoutingModule,
-    MaterialModule
+    MaterialModule,
   ]
 })
 export class HeroesModule { }
