@@ -1,5 +1,12 @@
-<ul>
-  <li *ngFor="let h of heroes">
-    {{h.alter_ego}}
-  </li>
-</ul>
+<h1 class="p-3 pb-0">Listado de Héroes</h1>
+<mat-divider></mat-divider>
+
+<div class="grid p-3">
+
+  <div class="col12 sm:col-4 md:col-3 xl:col-2"
+    *ngFor="let hero of heroes">
+    <heroes-hero-card [hero]="hero"></heroes-hero-card>
+
+  </div>
+
+</div>

@@ -9,6 +9,7 @@ import { ListPageComponent } from './pages/list-page/list-page.component';
 import { NewPageComponent } from './pages/new-page/new-page.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { HeroPageComponent } from './pages/hero-page/hero-page.component';
+import { CardComponent } from './components/card/card.component';
 
 
 
@@ -18,7 +19,8 @@ import { HeroPageComponent } from './pages/hero-page/hero-page.component';
     ListPageComponent,
     NewPageComponent,
     SearchPageComponent,
-    HeroPageComponent
+    HeroPageComponent,
+    CardComponent
   ],
   imports: [
     CommonModule,
