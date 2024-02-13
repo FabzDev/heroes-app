@@ -1,8 +1,8 @@
 import { Pipe, PipeTransform } from "@angular/core";
 import { Hero } from "../interfaces/heroes.interface";
 
-@Pipe({ name: 'cardImg' })
-export class CardImgPipe implements PipeTransform{
+@Pipe({ name: 'heroCardImg' })
+export class HeroCardImgPipe implements PipeTransform{
 
   transform(hero: Hero): string {
 
