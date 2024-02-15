@@ -3,27 +3,26 @@ import { FormControl } from '@angular/forms';
 import { Hero } from '../../interfaces/heroes.interface';
 import { HeroesService } from '../../services/heroes.service';
 import { Subject, debounceTime, switchMap, tap } from 'rxjs';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
 @Component({
   selector: 'app-search-page',
   templateUrl: './search-page.component.html',
   styles: ``,
 })
-export class SearchPageComponent implements OnInit{
+export class SearchPageComponent implements OnInit {
   public heroSearch = new FormControl('');
   public heroes: Hero[] = [];
   public searchSubject: Subject<string> = new Subject<string>();
   public switchOpt: boolean = false;
+  public selectedHero?: Hero | undefined;
 
   constructor(private heroesService: HeroesService) {}
 
   ngOnInit(): void {
-    this.searchSubject
-    .pipe(
-      debounceTime(3000))
-    .subscribe( inputText =>  {
-      console.log(this.switchOpt);
-      this.otraFuncion(inputText)})
+    this.searchSubject.pipe(debounceTime(500)).subscribe((inputText) => {
+      this.otraFuncion(inputText);
+    });
   }
 
   inputEvent() {
@@ -32,15 +31,21 @@ export class SearchPageComponent implements OnInit{
       this.switchOpt = false;
       this.heroes = [];
     } else {
-    this.searchSubject.next(inputText);
-   }
+      this.searchSubject.next(inputText);
+    }
   }
 
-  otraFuncion(inputOnInit: string){
+  otraFuncion(inputOnInit: string) {
+    this.heroesService.getSuggestions(inputOnInit).subscribe((heroes) => {
+      this.heroes = heroes;
+      this.switchOpt = true;
+    });
+  }
 
-    this.heroesService.getSuggestions(inputOnInit)
-    .subscribe( heroes => {this.heroes = heroes; this.switchOpt = true;
-
-    })
+  selectedOption(event: MatAutocompleteSelectedEvent): void {
+    this.selectedHero = event.option.value;
+    if (this.selectedHero) {
+      this.heroSearch.setValue(this.selectedHero.superhero);
+    }
   }
 }
