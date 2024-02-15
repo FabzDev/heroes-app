@@ -8,7 +8,7 @@
         type="text"
         matInput
         [formControl]="heroSearch"
-        (input)="getHeroes()"
+        (input)="inputEvent()"
         [matAutocomplete] = "auto">
 
         <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">

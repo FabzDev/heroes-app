@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, catchError, delay, of } from "rxjs";
+import { Observable, catchError, debounceTime, delay, of, switchMap } from "rxjs";
 import { Hero } from "../interfaces/heroes.interface";
 import { baseUrl } from "../../../environments/environments";
 
@@ -22,7 +22,7 @@ export class HeroesService {
   }
 
   getSuggestions( query: string): Observable<Hero[]>{
-    return this.http.get<Hero[]>(`${this.baseURL}/heroes?q=${query}&_limit=6`)
+    return this.http.get<Hero[]>(`${this.baseURL}/heroes?q=${query}&_limit=6`);
   }
 }
 
