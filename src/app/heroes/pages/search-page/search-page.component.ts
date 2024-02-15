@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Hero } from '../../interfaces/heroes.interface';
 import { HeroesService } from '../../services/heroes.service';
-import { Subject, debounceTime, switchMap } from 'rxjs';
+import { Subject, debounceTime, switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-search-page',
@@ -13,23 +13,34 @@ export class SearchPageComponent implements OnInit{
   public heroSearch = new FormControl('');
   public heroes: Hero[] = [];
   public searchSubject: Subject<string> = new Subject<string>();
-  public inputText:string = '';
+  public switchOpt: boolean = false;
 
   constructor(private heroesService: HeroesService) {}
 
   ngOnInit(): void {
     this.searchSubject
-    .pipe(debounceTime(5000))
-    .subscribe( inputText => this.otraFuncion(inputText))
+    .pipe(
+      debounceTime(3000))
+    .subscribe( inputText =>  {
+      console.log(this.switchOpt);
+      this.otraFuncion(inputText)})
   }
 
   inputEvent() {
-    this.searchSubject.next(this.inputText);
+    const inputText: string = this.heroSearch.value || '';
+    if (inputText == '') {
+      this.switchOpt = false;
+      this.heroes = [];
+    } else {
+    this.searchSubject.next(inputText);
+   }
   }
 
-  otraFuncion(someStr: string){
-    if (this.heroSearch.value) this.inputText = this.heroSearch.value;
-    this.heroesService.getSuggestions(someStr)
-    .subscribe( heroes => this.heroes = heroes)
+  otraFuncion(inputOnInit: string){
+
+    this.heroesService.getSuggestions(inputOnInit)
+    .subscribe( heroes => {this.heroes = heroes; this.switchOpt = true;
+
+    })
   }
 }
