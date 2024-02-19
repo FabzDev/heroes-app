@@ -45,14 +45,15 @@ export class NewPageComponent implements OnInit{
     ){}
 
   ngOnInit(): void {
-    if (!this.router.url.includes('edit')) return;
+    if (!this.router.url.includes('edit')){
+      return;
+    }
 
     this.activatedRoute.params
     .pipe(switchMap( ({id}) => this.heroesService.getHerobyId(id)))
     .subscribe( hero => {
       if(hero) {
-        console.log(hero);
-
+        console.log(hero);                  //CONSOLE LOG
         this.heroForm.reset( hero ) }
       return
     })
