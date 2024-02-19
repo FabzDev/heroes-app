@@ -71,7 +71,7 @@ export class NewPageComponent implements OnInit{
     if (this.currentHero.id) {
       this.heroesService.updateHero(this.currentHero)
       .subscribe(hero => {
-        this.showSnackbar('Héroe editado');
+        this.showSnackbar(`${hero.superhero} updated!`);
         this.router.navigate([`heroes/edit/${this.currentHero.id}`]);
         console.log(hero);
       })
@@ -80,7 +80,7 @@ export class NewPageComponent implements OnInit{
 
       this.heroesService.addHero(this.currentHero)
       .subscribe(hero => {
-        this.showSnackbar('Héroe agregado');
+        this.showSnackbar(`${hero.superhero} added!`);
         this.router.navigate(['heroes/list']);
         console.log(hero);
       })
@@ -89,14 +89,14 @@ export class NewPageComponent implements OnInit{
   onDelete():void {
     this.heroesService.deleteHeroById(this.currentHero)
     .subscribe(hero => {
-      this.showSnackbar('Héroe eliminado');
+      this.showSnackbar(`${this.currentHero.superhero} deleted!`);
       this.router.navigate(['heroes/list']);
       console.log(hero);
     })
   }
 
   showSnackbar(message: string): void{
-    this.snackbar.open(message, 'asd',{
+    this.snackbar.open(message, 'done',{
       duration: 2500
     });
 
