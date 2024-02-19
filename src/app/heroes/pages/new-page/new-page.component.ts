@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Hero, Publisher } from '../../interfaces/heroes.interface';
 import { HeroesService } from '../../services/heroes.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Hero, Publisher } from '../../interfaces/heroes.interface';
 import { switchMap } from 'rxjs';
 
 @Component({
@@ -41,7 +42,8 @@ export class NewPageComponent implements OnInit{
   constructor(
     private heroesService: HeroesService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private snackbar: MatSnackBar
     ){}
 
   ngOnInit(): void {
@@ -57,7 +59,6 @@ export class NewPageComponent implements OnInit{
         this.heroForm.reset( hero ) }
       return
     })
-
   }
 
   get currentHero(): Hero {
@@ -69,12 +70,35 @@ export class NewPageComponent implements OnInit{
 
     if (this.currentHero.id) {
       this.heroesService.updateHero(this.currentHero)
-      .subscribe(hero => console.log(hero))
+      .subscribe(hero => {
+        this.showSnackbar('Héroe editado');
+        this.router.navigate([`heroes/edit/${this.currentHero.id}`]);
+        console.log(hero);
+      })
       return
     }
 
       this.heroesService.addHero(this.currentHero)
-      .subscribe(hero => { console.log(hero)
+      .subscribe(hero => {
+        this.showSnackbar('Héroe agregado');
+        this.router.navigate(['heroes/list']);
+        console.log(hero);
       })
+  }
+
+  onDelete():void {
+    this.heroesService.deleteHeroById(this.currentHero)
+    .subscribe(hero => {
+      this.showSnackbar('Héroe eliminado');
+      this.router.navigate(['heroes/list']);
+      console.log(hero);
+    })
+  }
+
+  showSnackbar(message: string): void{
+    this.snackbar.open(message, 'asd',{
+      duration: 2500
+    });
+
   }
 }

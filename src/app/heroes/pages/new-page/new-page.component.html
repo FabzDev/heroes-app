@@ -53,7 +53,7 @@
 
         <div class="flex justify-content-between">
 
-          <button mat-flat-button color="warn"  *ngIf="currentHero.id">
+          <button mat-flat-button color="warn"  *ngIf="currentHero.id" (click)="onDelete()">
             <mat-icon>delete</mat-icon>
             Borrar
           </button>
