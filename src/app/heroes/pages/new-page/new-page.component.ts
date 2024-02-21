@@ -55,12 +55,11 @@ export class NewPageComponent implements OnInit {
     if (!this.router.url.includes('edit')) {
       return;
     }
-
     this.activatedRoute.params
       .pipe(switchMap(({ id }) => this.heroesService.getHerobyId(id)))
       .subscribe((hero) => {
         if (hero) {
-          console.log(hero); //CONSOLE LOG
+          // console.log(hero); //CONSOLE LOG
           this.heroForm.reset(hero);
         }
         return;
@@ -90,73 +89,28 @@ export class NewPageComponent implements OnInit {
     });
   }
 
-  onDelete(): void {
-    const dialogRef = this.matDialog.open(DeleteDialogComponent, {
-      data: this.heroForm.value,
-    });
-
-    dialogRef.afterClosed()
-      .pipe(
-        switchMap((result) => {
-          if (result) {
-            console.log('if');
-
-            return this.heroesService.deleteHeroById(this.currentHero);
-          } else {
-            console.log('else');
-
-            return of(result);
-          }
-        })
-      )
-      .subscribe((result) => {
-        console.log('result solo: ' + result);
-        if (result) {
-          console.log('result if: ' + result);
-
-          this.showSnackbar(`${this.currentHero.superhero} deleted!`);
-          this.router.navigate(['heroes/list']);
-        }
-      });
-
-    // if (result) {
-    //
-    //   this.showSnackbar(`${this.currentHero.superhero} deleted!`);
-    //   this.router.navigate(['heroes/list']);
-    // }
-
-    // .pipe(
-    //   switchMap( result => {
-    //     if(result) {
-    //       this.heroesService.deleteHeroById(this.currentHero);
-    //       this.showSnackbar(`${this.currentHero.superhero} deleted!`);
-    //       this.router.navigate(['heroes/list']);
-    //     } else {
-    //       console.log('Operacion cancelada');
-    //     }
-    //   })
-    // )
-    // .subscribe((result) => {
-    // });
-  }
-
-  // this.showSnackbar(`${this.currentHero.superhero} deleted!`);
-  // this.router.navigate(['heroes/list']);
-  // return this.heroesService.deleteHeroById(this.heroForm.value as Hero);
-
   showSnackbar(message: string): void {
     this.snackbar.open(message, 'done', {
       duration: 2500,
     });
   }
 
-  // openDialog(): void {
-  //   const dialogRef = this.matDialog.open(DeleteDialogComponent, {
-  //     data: this.heroForm.value,
-  //   });
+  openDialog(): void {
+    const dialogRef = this.matDialog.open(DeleteDialogComponent, {
+      data: this.heroForm.value,
+    });
 
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     this.areYouSure = result
-  //   })
-  // }
+    dialogRef
+      .afterClosed()
+      .pipe(
+        switchMap((result) => {
+          if (!result) return of(false);
+
+          this.router.navigate(['heroes/list']);
+          this.showSnackbar(`${this.currentHero.superhero} deleted!`);
+          return this.heroesService.deleteHeroById(this.currentHero);
+        })
+      )
+      .subscribe();
+  }
 }
