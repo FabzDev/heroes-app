@@ -8,15 +8,6 @@
   ],
   "heroes": [
     {
-      "id": "dc-batman",
-      "superhero": "Batman",
-      "publisher": "DC Comics",
-      "alter_ego": "Bruce Wayne",
-      "first_appearance": "Detective Comics #27",
-      "characters": "Bruce Wayne",
-      "alter_img": null
-    },
-    {
       "id": "dc-superman",
       "superhero": "Superman",
       "publisher": "DC Comics",
@@ -170,15 +161,6 @@
       "alter_ego": "Norrin Radd",
       "first_appearance": "The Fantastic Four #48",
       "characters": "Norrin Radd"
-    },
-    {
-      "id": "6-nhDxL",
-      "superhero": "Eren Yaegar",
-      "publisher": "AOT",
-      "alter_ego": "Attack on titan",
-      "first_appearance": "Shinganshina - Para ti dentro de 2000 años",
-      "characters": "Levi, Mikasa, Armin",
-      "alter_img": "https://e1.pxfuel.com/desktop-wallpaper/680/55/desktop-wallpaper-eren-yeager-manga-eren-yeager.jpg"
     }
   ]
 }

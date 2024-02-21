@@ -13,6 +13,7 @@ import { HeroPageComponent } from './pages/hero-page/hero-page.component';
 import { CardComponent } from './components/card/card.component';
 
 import { CardImgPipe } from './pipes/hero-card-img.pipe';
+import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { CardImgPipe } from './pipes/hero-card-img.pipe';
     HeroPageComponent,
     CardComponent,
     CardImgPipe,
+    DeleteDialogComponent,
 
   ],
   imports: [
