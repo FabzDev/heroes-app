@@ -25,15 +25,6 @@
       "alter_img": null
     },
     {
-      "id": "dc-wonder",
-      "superhero": "Wonder Woman",
-      "publisher": "DC Comics",
-      "alter_ego": "Princess Diana",
-      "first_appearance": "All Star Comics #8",
-      "characters": "Princess Diana",
-      "alter_img": "https://everythingcomics.ca/cdn/shop/products/202308-0000431208.jpg"
-    },
-    {
       "id": "marvel-spider",
       "superhero": "Spider Man",
       "publisher": "Marvel Comics",
@@ -80,14 +71,6 @@
       "alter_ego": "James Howlett",
       "first_appearance": "The Incredible Hulk #180",
       "characters": "James Howlett"
-    },
-    {
-      "id": "marvel-daredevil",
-      "superhero": "Daredevil",
-      "publisher": "Marvel Comics",
-      "alter_ego": "Matthew Michael Murdock",
-      "first_appearance": "Daredevil #1",
-      "characters": "Matthew Michael Murdock"
     },
     {
       "id": "marvel-cyclops",

@@ -104,15 +104,13 @@ export class NewPageComponent implements OnInit {
     .afterClosed()
     .pipe(
       filter(res => res === true),
-      switchMap(() => {
-        // this.router.navigate(['heroes/list']);
-        // this.showSnackbar(`${this.currentHero.superhero} deleted!`);
-        return this.heroesService.deleteHeroById(this.currentHero);
-      }),
-      filter(res => false),
-      catchError(err => of(false))
+      switchMap(() => this.heroesService.deleteHeroById(this.currentHero)),
+      filter(res => res === true),
     )
-    .subscribe();
+    .subscribe(()=> {
+      this.router.navigate(['heroes/list']);
+      this.showSnackbar(`${this.currentHero.superhero} deleted!`);
+    });
 
     // dialogRef
     //   .afterClosed()
