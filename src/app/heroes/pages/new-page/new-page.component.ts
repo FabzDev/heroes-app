@@ -4,7 +4,7 @@ import { HeroesService } from '../../services/heroes.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Hero, Publisher } from '../../interfaces/heroes.interface';
-import { map, of, switchMap, tap } from 'rxjs';
+import { catchError, filter, map, of, switchMap, tap } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent } from '../../components/delete-dialog/delete-dialog.component';
 
@@ -101,16 +101,30 @@ export class NewPageComponent implements OnInit {
     });
 
     dialogRef
-      .afterClosed()
-      .pipe(
-        switchMap((result) => {
-          if (!result) return of(false);
+    .afterClosed()
+    .pipe(
+      filter(res => res === true),
+      switchMap(() => {
+        // this.router.navigate(['heroes/list']);
+        // this.showSnackbar(`${this.currentHero.superhero} deleted!`);
+        return this.heroesService.deleteHeroById(this.currentHero);
+      }),
+      filter(res => false),
+      catchError(err => of(false))
+    )
+    .subscribe();
 
-          this.router.navigate(['heroes/list']);
-          this.showSnackbar(`${this.currentHero.superhero} deleted!`);
-          return this.heroesService.deleteHeroById(this.currentHero);
-        })
-      )
-      .subscribe();
+    // dialogRef
+    //   .afterClosed()
+    //   .pipe(
+    //     switchMap((result) => {
+    //       if (!result) return of(false);
+
+    //       this.router.navigate(['heroes/list']);
+    //       this.showSnackbar(`${this.currentHero.superhero} deleted!`);
+    //       return this.heroesService.deleteHeroById(this.currentHero);
+    //     })
+    //   )
+    //   .subscribe();
   }
 }
