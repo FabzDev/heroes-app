@@ -111,18 +111,5 @@ export class NewPageComponent implements OnInit {
       this.router.navigate(['heroes/list']);
       this.showSnackbar(`${this.currentHero.superhero} deleted!`);
     });
-
-    // dialogRef
-    //   .afterClosed()
-    //   .pipe(
-    //     switchMap((result) => {
-    //       if (!result) return of(false);
-
-    //       this.router.navigate(['heroes/list']);
-    //       this.showSnackbar(`${this.currentHero.superhero} deleted!`);
-    //       return this.heroesService.deleteHeroById(this.currentHero);
-    //     })
-    //   )
-    //   .subscribe();
   }
 }
