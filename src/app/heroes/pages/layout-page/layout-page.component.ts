@@ -8,7 +8,7 @@ import { User } from '../../../auth/interfaces/user.interface';
   templateUrl: './layout-page.component.html',
   styles: ``,
 })
-export class LayoutPageComponent {
+export class LayoutPageComponent implements OnInit{
 
   public sideNavItems = [
     {
@@ -31,6 +31,10 @@ export class LayoutPageComponent {
   constructor(
     private authService: AuthService,
     private router: Router) {}
+
+  ngOnInit(): void {
+    this.authService.checkAuthenticated().subscribe(resp => console.log(resp));
+  }
 
   get user(): User | undefined{
     return this.authService.currentUser;
