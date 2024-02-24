@@ -33,7 +33,7 @@ export class LayoutPageComponent implements OnInit{
     private router: Router) {}
 
   ngOnInit(): void {
-    this.authService.checkAuthenticated().subscribe(resp => console.log(resp));
+    // this.authService.checkAuthenticated().subscribe(resp => console.log(resp));
   }
 
   get user(): User | undefined{
