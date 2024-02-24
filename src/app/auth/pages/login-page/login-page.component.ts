@@ -9,7 +9,6 @@ import { User } from '../../interfaces/user.interface';
   styles: ``
 })
 export class LoginPageComponent {
-  private currentUser?: User;
 
   constructor(
     private authService: AuthService,
@@ -17,9 +16,10 @@ export class LoginPageComponent {
     ){}
 
   onLogin(user: string, pass: string): void{
-    this.authService.login(user, pass).subscribe();
-    this.currentUser = this.authService.currentUser;
-    this.router.navigate(['/']);
+    this.authService.login(user, pass)
+    .subscribe(user => {
+      this.router.navigate(['/heroes/list']);
+    });
 
   }
 }
